@@ -13,6 +13,7 @@ import dlib
 import cv2
 import math
 
+# 定义舵机
 myKit = ServoKit(channels=16)
 pan_out = 90
 titl_out = 70
@@ -101,7 +102,7 @@ while True:
         (pan, tilt) = shape[28]
         pan_error = 180 - pan
         tilt_error = 135 - tilt
-
+         # 增量式PID，只用了P
         if abs(pan_error) > 10:
             pan_out = pan_out + pan_error // 30
 
@@ -120,10 +121,9 @@ while True:
         if titl_out <= 10:
             titl_out = 10
 
-        print(titl_out)
+        # 控制舵机输出
         myKit.servo[1].angle = pan_out
         myKit.servo[0].angle = titl_out
-        # myKit.servo[0].angle = tilt
         """
             分别计算左眼和右眼的评分求平均作为最终的评分，如果小于阈值，则加1，如果连续3次都小于阈值，则表示进行了一次眨眼活动
         """
