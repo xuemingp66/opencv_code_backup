@@ -1,0 +1,3 @@
+sudo umount /dev/sdb
+
+sudo dd if=/dev/sdb conv=sync,noerror bs=64K | gzip -c > ~/backup_image.img.gz
